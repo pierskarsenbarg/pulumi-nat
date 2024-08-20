@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/pierskarsenbarg/provider-base/pkg"
+	"github.com/pierskarsenbarg/pulumi-fcknat/pkg"
 	p "github.com/pulumi/pulumi-go-provider"
 	"github.com/pulumi/pulumi-go-provider/infer"
 	"github.com/pulumi/pulumi-go-provider/middleware/schema"
@@ -16,7 +16,7 @@ import (
 )
 
 func main() {
-	err := p.RunProvider("base", "0.1.0", provider())
+	err := p.RunProvider("fcknat", "0.1.0", provider())
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %s", err.Error())
 		os.Exit(1)
@@ -26,16 +26,17 @@ func main() {
 func provider() p.Provider {
 	return infer.Provider(infer.Options{
 		Metadata: schema.Metadata{
-			DisplayName: "base",
-			Description: "base provider template",
+			DisplayName: "fcknat",
+			Description: "Pulumi Component to create a FCK-NAT based nat gateway",
 			LanguageMap: map[string]any{
 				"go": gogen.GoPackageInfo{
-					ImportBasePath: "github.com/pierskarsenbarg/provider-base/sdk/go/base",
+					ImportBasePath: "github.com/pierskarsenbarg/pulumi-fcknat/sdk/go/fcknat",
 				},
 				"nodejs": nodejsgen.NodePackageInfo{
-					PackageName: "@pierskarsenbarg/base",
+					PackageName: "@pierskarsenbarg/fcknat",
 					Dependencies: map[string]string{
 						"@pulumi/pulumi": "^3.0.0",
+						"@pulumi/aws": "^6.48.0",
 					},
 					DevDependencies: map[string]string{
 						"@types/node": "^10.0.0", // so we can access strongly typed node definitions.
@@ -46,27 +47,25 @@ func provider() p.Provider {
 					RootNamespace: "PiersKarsenbarg",
 					PackageReferences: map[string]string{
 						"Pulumi": "3.*",
+						"Pulumi.Aws": "6.*",
 					},
 				},
 				"python": pythongen.PackageInfo{
 					Requires: map[string]string{
 						"pulumi": ">=3.0.0,<4.0.0",
+						"pulumi-aws": ">=6.0.0,<7.0.0",
 					},
-					PackageName: "pierskarsenbarg_pulumi_base",
+					PackageName: "pierskarsenbarg_pulumi_fcknat",
 				},
 			},
-			PluginDownloadURL: "github://api.github.com/pierskarsenbarg/pulumi-base",
+			PluginDownloadURL: "github://api.github.com/pierskarsenbarg/pulumi-fcknat",
 			Publisher:         "Piers Karsenbarg",
-		},
-		Resources: []infer.InferredResource{
-			infer.Resource[*pkg.Account, pkg.AccountArgs, pkg.AccountState](),
 		},
 		ModuleMap: map[tokens.ModuleName]tokens.ModuleName{
 			"pkg": "index", // required because the folder with everything in is "pkg"
 		},
-		Functions: []infer.InferredFunction{
-			infer.Function[*pkg.GetAccount, pkg.GetAccountArgs, pkg.AccountState](),
+		Components: []infer.InferredComponent{
+			infer.Component[*pkg.NatInstance, pkg.NatInstanceArgs, *pkg.NatInstanceState](),
 		},
-		Config: infer.Config[*pkg.Config](),
 	})
 }

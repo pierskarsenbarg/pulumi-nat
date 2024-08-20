@@ -1,10 +1,11 @@
 {
-    "name": "@pierskarsenbarg/base",
+    "name": "@pierskarsenbarg/fcknat",
     "version": "${VERSION}",
     "scripts": {
         "build": "tsc"
     },
     "dependencies": {
+        "@pulumi/aws": "^6.48.0",
         "@pulumi/pulumi": "^3.0.0"
     },
     "devDependencies": {
@@ -14,7 +15,7 @@
     },
     "pulumi": {
         "resource": true,
-        "name": "base",
-        "server": "github://api.github.com/pierskarsenbarg/pulumi-base"
+        "name": "fcknat",
+        "server": "github://api.github.com/pierskarsenbarg/pulumi-fcknat"
     }
 }

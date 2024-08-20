@@ -1,4 +1,4 @@
-module github.com/pierskarsenbarg/provider-base/sdk
+module github.com/pierskarsenbarg/pulumi-fcknat/sdk
 
 go 1.21.5
 

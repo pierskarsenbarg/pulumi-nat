@@ -1,5 +1,0 @@
-{
-  "resource": true,
-  "name": "base",
-  "server": "github://api.github.com/pierskarsenbarg/pulumi-base"
-}

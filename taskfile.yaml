@@ -1,10 +1,10 @@
-version: '3'
+version: "3"
 
 vars:
-  VERSION: 
+  VERSION:
     sh: pulumictl get version
   VERSION_PATH: main.Version
-  PROVIDER_NAME: base
+  PROVIDER_NAME: fcknat
   PROVIDER: pulumi-resource-{{.PROVIDER_NAME}}
   PROJECT: github.com/pierskarsenbarg/pulumi-{{.PROVIDER_NAME}}
   SDK_DIR: sdk
@@ -28,7 +28,7 @@ tasks:
       - rm -f schema.json
       - pulumi package get-schema ./bin/{{.PROVIDER}} >> schema.json
   dotnet_sdk:
-    cmds: 
+    cmds:
       - rm -rf sdk/dotnet
       - pulumi package gen-sdk ./bin/{{.PROVIDER}} --language dotnet
       - |
@@ -36,13 +36,13 @@ tasks:
         echo "{{.DOTNET_VERSION}}" >version.txt && \
         dotnet build /p:Version={{.DOTNET_VERSION}}
     vars:
-      DOTNET_VERSION: 
+      DOTNET_VERSION:
         sh: pulumictl get version --language dotnet
   nodejs_sdk:
-    cmds: 
+    cmds:
       - rm -rf sdk/nodejs
       - pulumi package gen-sdk ./bin/{{.PROVIDER}} --language nodejs
-      - | 
+      - |
         cd {{.SDK_DIR}}/nodejs/ && \
           yarn install && \
           yarn run tsc && \
@@ -53,7 +53,7 @@ tasks:
       NODEJS_VERSION:
         sh: pulumictl get version --language javascript
   go_sdk:
-    cmds: 
+    cmds:
       - rm -rf sdk/go
       - pulumi package gen-sdk ./bin/{{.PROVIDER}} --language go
   python_sdk:
@@ -69,7 +69,7 @@ tasks:
           rm ./bin/setup.py.bak && \
           cd ./bin && python3 setup.py build sdist
     vars:
-      PYTHON_VERSION: 
+      PYTHON_VERSION:
         sh: pulumictl get version --language python
   build_sdks:
     deps: [build_provider]
@@ -81,8 +81,9 @@ tasks:
   watch:
     watch: true
     sources:
-      - '**/*.go'
+      - "**/*.go"
     interval: 500ms
     cmds:
       - go mod tidy
       - task: build_provider
+      - echo "Provider built"

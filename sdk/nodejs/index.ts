@@ -5,15 +5,10 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
-export { AccountArgs } from "./account";
-export type Account = import("./account").Account;
-export const Account: typeof import("./account").Account = null as any;
-utilities.lazyLoad(exports, ["Account"], () => require("./account"));
-
-export { GetAccountArgs, GetAccountResult, GetAccountOutputArgs } from "./getAccount";
-export const getAccount: typeof import("./getAccount").getAccount = null as any;
-export const getAccountOutput: typeof import("./getAccount").getAccountOutput = null as any;
-utilities.lazyLoad(exports, ["getAccount","getAccountOutput"], () => require("./getAccount"));
+export { NatInstanceArgs } from "./natInstance";
+export type NatInstance = import("./natInstance").NatInstance;
+export const NatInstance: typeof import("./natInstance").NatInstance = null as any;
+utilities.lazyLoad(exports, ["NatInstance"], () => require("./natInstance"));
 
 export { ProviderArgs } from "./provider";
 export type Provider = import("./provider").Provider;
@@ -21,29 +16,22 @@ export const Provider: typeof import("./provider").Provider = null as any;
 utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
 
 
-// Export sub-modules:
-import * as config from "./config";
-
-export {
-    config,
-};
-
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
-            case "base:index:Account":
-                return new Account(name, <any>undefined, { urn })
+            case "fcknat:index:NatInstance":
+                return new NatInstance(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
-pulumi.runtime.registerResourceModule("base", "index", _module)
-pulumi.runtime.registerResourcePackage("base", {
+pulumi.runtime.registerResourceModule("fcknat", "index", _module)
+pulumi.runtime.registerResourcePackage("fcknat", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {
-        if (type !== "pulumi:providers:base") {
+        if (type !== "pulumi:providers:fcknat") {
             throw new Error(`unknown provider type ${type}`);
         }
         return new Provider(name, <any>undefined, { urn });

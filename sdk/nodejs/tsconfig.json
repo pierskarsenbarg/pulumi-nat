@@ -13,11 +13,8 @@
         "strict": true
     },
     "files": [
-        "account.ts",
-        "config/index.ts",
-        "config/vars.ts",
-        "getAccount.ts",
         "index.ts",
+        "natInstance.ts",
         "provider.ts",
         "utilities.ts"
     ]

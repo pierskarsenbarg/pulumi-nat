@@ -14,18 +14,18 @@ def readme():
         with open('README.md', encoding='utf-8') as f:
             return f.read()
     except FileNotFoundError:
-        return "base Pulumi Package - Development Version"
+        return "fcknat Pulumi Package - Development Version"
 
 
-setup(name='pierskarsenbarg_pulumi_base',
+setup(name='pierskarsenbarg_pulumi_fcknat',
       python_requires='>=3.8',
       version=VERSION,
-      description="base provider template",
+      description="Pulumi Component to create a FCK-NAT based nat gateway",
       long_description=readme(),
       long_description_content_type='text/markdown',
       packages=find_packages(),
       package_data={
-          'pierskarsenbarg_pulumi_base': [
+          'pierskarsenbarg_pulumi_fcknat': [
               'py.typed',
               'pulumi-plugin.json',
           ]
@@ -33,6 +33,7 @@ setup(name='pierskarsenbarg_pulumi_base',
       install_requires=[
           'parver>=0.2.1',
           'pulumi>=3.0.0,<4.0.0',
+          'pulumi-aws>=6.0.0,<7.0.0',
           'semver>=2.8.1'
       ],
       zip_safe=False)

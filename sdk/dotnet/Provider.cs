@@ -8,24 +8,11 @@ using System.Threading.Tasks;
 using Pulumi.Serialization;
 using Pulumi;
 
-namespace PiersKarsenbarg.Base
+namespace PiersKarsenbarg.Fcknat
 {
-    [BaseResourceType("pulumi:providers:base")]
+    [FcknatResourceType("pulumi:providers:fcknat")]
     public partial class Provider : global::Pulumi.ProviderResource
     {
-        /// <summary>
-        /// Your access token
-        /// </summary>
-        [Output("accessToken")]
-        public Output<string> AccessToken { get; private set; } = null!;
-
-        /// <summary>
-        /// Environment
-        /// </summary>
-        [Output("environment")]
-        public Output<string?> Environment { get; private set; } = null!;
-
-
         /// <summary>
         /// Create a Provider resource with the given unique name, arguments, and options.
         /// </summary>
@@ -33,8 +20,8 @@ namespace PiersKarsenbarg.Base
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Provider(string name, ProviderArgs args, CustomResourceOptions? options = null)
-            : base("base", name, args ?? new ProviderArgs(), MakeResourceOptions(options, ""))
+        public Provider(string name, ProviderArgs? args = null, CustomResourceOptions? options = null)
+            : base("fcknat", name, args ?? new ProviderArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -43,11 +30,7 @@ namespace PiersKarsenbarg.Base
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "github://api.github.com/pierskarsenbarg/pulumi-base",
-                AdditionalSecretOutputs =
-                {
-                    "accessToken",
-                },
+                PluginDownloadURL = "github://api.github.com/pierskarsenbarg/pulumi-fcknat",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -58,28 +41,6 @@ namespace PiersKarsenbarg.Base
 
     public sealed class ProviderArgs : global::Pulumi.ResourceArgs
     {
-        [Input("accessToken", required: true)]
-        private Input<string>? _accessToken;
-
-        /// <summary>
-        /// Your access token
-        /// </summary>
-        public Input<string>? AccessToken
-        {
-            get => _accessToken;
-            set
-            {
-                var emptySecret = Output.CreateSecret(0);
-                _accessToken = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
-            }
-        }
-
-        /// <summary>
-        /// Environment
-        /// </summary>
-        [Input("environment")]
-        public Input<string>? Environment { get; set; }
-
         public ProviderArgs()
         {
         }
