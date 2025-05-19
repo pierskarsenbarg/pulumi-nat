@@ -5,9 +5,9 @@ go 1.24
 require (
 	github.com/google/uuid v1.6.0
 	github.com/pulumi/pulumi-aws/sdk/v6 v6.80.0
-	github.com/pulumi/pulumi-go-provider v0.26.0
-	github.com/pulumi/pulumi/pkg/v3 v3.162.0
-	github.com/pulumi/pulumi/sdk/v3 v3.163.0
+	github.com/pulumi/pulumi-go-provider v1.0.1
+	github.com/pulumi/pulumi/pkg/v3 v3.169.0
+	github.com/pulumi/pulumi/sdk/v3 v3.169.0
 )
 
 require (
@@ -53,7 +53,6 @@ require (
 	github.com/mattn/go-runewidth v0.0.15 // indirect
 	github.com/mitchellh/go-ps v1.0.0 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
-	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/muesli/ansi v0.0.0-20230316100256-276c6243b2f6 // indirect
 	github.com/muesli/cancelreader v0.2.2 // indirect
 	github.com/muesli/reflow v0.3.0 // indirect
@@ -87,14 +86,14 @@ require (
 	github.com/xanzy/ssh-agent v0.3.3 // indirect
 	github.com/zclconf/go-cty v1.13.2 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
-	golang.org/x/crypto v0.35.0 // indirect
+	golang.org/x/crypto v0.37.0 // indirect
 	golang.org/x/exp v0.0.0-20240719175910-8a7402abbf56 // indirect
 	golang.org/x/mod v0.19.0 // indirect
-	golang.org/x/net v0.36.0 // indirect
-	golang.org/x/sync v0.11.0 // indirect
-	golang.org/x/sys v0.30.0 // indirect
-	golang.org/x/term v0.29.0 // indirect
-	golang.org/x/text v0.22.0 // indirect
+	golang.org/x/net v0.39.0 // indirect
+	golang.org/x/sync v0.13.0 // indirect
+	golang.org/x/sys v0.32.0 // indirect
+	golang.org/x/term v0.31.0 // indirect
+	golang.org/x/text v0.24.0 // indirect
 	golang.org/x/tools v0.23.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240814211410-ddb44dafa142 // indirect
 	google.golang.org/grpc v1.67.1 // indirect
